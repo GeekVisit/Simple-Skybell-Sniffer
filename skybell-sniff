@@ -1,4 +1,4 @@
-# /etc/systemd/system/skybell-sniff.service
+# /etc/default/skybell-sniff
 # Copyright © 2017 Alexander Thoukydides
 
 # SkyBell HD doorbell hostname (or IP address) and name
