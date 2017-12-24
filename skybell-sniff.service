@@ -1,0 +1,19 @@
+# /etc/systemd/system/skybell-sniff.service
+# Copyright © 2017 Alexander Thoukydides
+
+[Unit]
+Description=SkyBell HD event detection
+After=network-online.target
+
+[Service]
+Type=simple
+User=root
+EnvironmentFile=/etc/default/skybell-sniff
+ExecStart=/usr/bin/skybell-sniff.pl ${SKYBELL_HOST} ${SKYBELL_CMD_TCPDUMP} ${SKYBELL_CMD_MOTION}
+StandardOutput=journal
+Restart=on-failure
+RestartSec=10
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target
