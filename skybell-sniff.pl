@@ -9,17 +9,13 @@ use Socket;
 # Ensure that standard output is not buffered
 $| = 1, select $_ for select STDOUT;
 
-# Perform environment variable substitution on arguments
+# Process the command line, substituting environment variables
+die "$0 SKYBELL-HOST TCPDUMP-COMMAND MOTION-COMMAND\n" unless scalar @ARGV == 3;
 foreach my $arg (@ARGV)
 {
     $arg =~ s/\$\{(\w+)}/$ENV{$1}/ge;
 }
-
-# Process the command line
-die "$0 SKYBELL-HOST TCPDUMP-COMMAND MOTION-COMMAND\n" unless scalar @ARGV == 3;
-my $skybell_host = $ARGV[0];
-my $cmd_tcpdump = $ARGV[1];
-my $cmd_motion = $ARGV[2];
+my ($skybell_host, $cmd_tcpdump, $cmd_motion) = @ARGV;
 
 # Timeout (in seconds) to recognise a packet sequence
 my $timeout = 10;
@@ -73,12 +69,15 @@ while (<$pipe>)
             $state = 'on-demand';
         }
     }
-    elsif ($state eq 'armed' and not $from_skybell and $length == 49)
+    elsif ($state eq 'armed')
     {
-        print "Motion detected\n";
-        $state = 'motion';
-        system($cmd_motion) == 0
-            or warn "Failed to execute command: $?\n";
+        if(not $from_skybell and $length == 49)
+        {
+            print "Motion detected\n";
+            $state = 'motion';
+            system($cmd_motion) == 0
+                or warn "Failed to execute command: $?\n";
+        }
     }
 }
 

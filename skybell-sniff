@@ -9,8 +9,12 @@ SKYBELL_NAME='Doorbell'
 HOMEBRIDGE_SKYBELL_PORT=47569
 HOMEBRIDGE_SKYBELL_SECRET='My webhooks secret'
 
+# Gateway/router hostname and ssh username
+ROUTER_HOST=192.168.0.1
+ROUTER_USER=root
+
 # Command used to sniff the doorbell traffic
-SKYBELL_CMD_TCPDUMP="ssh root@192.168.0.1 \"/usr/sbin/tcpdump -lpnttti eth0 host ${SKYBELL_HOST} and port 5683\""
+SKYBELL_CMD_TCPDUMP="ssh ${ROUTER_USER}@${ROUTER_HOST} \"/usr/sbin/tcpdump -lpnttti eth0 host ${SKYBELL_HOST} and port 5683\""
 
 # Command executed when a button press or motion is detected
 SKYBELL_CMD_MOTION="curl -d '{\"secret\":\"${HOMEBRIDGE_SKYBELL_SECRET}\",\"name\":\"${SKYBELL_NAME}\"}' http://localhost:${HOMEBRIDGE_SKYBELL_PORT}/homebridge-skybell/trigger/motion"
