@@ -1,6 +1,6 @@
 # /etc/default/skybell-sniff
 # Copyright © 2017 Alexander Thoukydides (Homebridge plugin)
-# COpyright @2018 Geekvisit (changes made for Simple Skybell Sniffer to delete homebridge stuff)
+# Copyright @2018 Geekvisit (changes made for Simple Skybell Sniffer to delete homebridge stuff)
 
 # SkyBell HD doorbell hostname (or IP address) and name
 SKYBELL_HOST=192.168.0.133 #Ip address of your doorbell as seen in your router
