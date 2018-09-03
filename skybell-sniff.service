@@ -7,7 +7,8 @@ After=network-online.target
 
 [Service]
 Type=simple
-User=root
+#edit to put in your username
+User=username
 EnvironmentFile=/etc/default/skybell-sniff
 ExecStart=/usr/local/bin/skybell-sniff.pl ${SKYBELL_HOST} ${SKYBELL_CMD_TCPDUMP} ${SKYBELL_CMD_MOTION}
 StandardOutput=journal
