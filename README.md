@@ -16,7 +16,7 @@ The service runs on your raspberry pi or other linux server and opens up an ssh 
 # Why Use It ? 
 
 -  Make your doorbell (or motion detection) trigger any command you wish.  
--  No existing doorbell or can't hook up your Skybell to your existing doorbell wiring ? No problem, just have your play an mp3 of a doorbell
+-  No existing doorbell or can't hook up your Skybell to your existing doorbell wiring ? No problem, just play an mp3 of a doorbell
 - Use [Google Home Notifier](https://github.com/harperreed/google-home-notifier-python) to cast to your Google Home Devices or any chromecast an  MP3 when someone presses the doorbell or have the Google Assistant announce "You have a visitor at your door" 
 - Send custom telegram notifications to your phone using the [Telegram CLI](https://github.com/vysheng/tg)
 
