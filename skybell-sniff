@@ -3,20 +3,20 @@
 # Copyright @2018 Geekvisit (changes made for Simple Skybell Sniffer to delete homebridge stuff)
 
 # SkyBell HD doorbell hostname (or IP address) and name
-SKYBELL_HOST=192.168.0.133 #Ip address of your doorbell as seen in your router
-SKYBELL_NAME='Front Door' #Name of Skybell in he Skybell APp
+SKYBELL_HOST=192.168.0.133 
+#Name of Skybell in he Skybell App
+SKYBELL_NAME='Front Door' 
 #Internal IP address of your linux server
 LINUX_SERVER=$(ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p')
 # Change to your Gateway/router hostname and ssh username
 ROUTER_HOST=192.168.0.1
 ROUTER_USER=root
 
-# Command used to sniff the doorbell traffic
-#SKYBELL_CMD_TCPDUMP="ssh ${ROUTER_USER}@${ROUTER_HOST} \"/usr/sbin/tcpdump -lpnttti eth0 host ${SKYBELL_HOST} and port 5683\""
+# SSH command to your router to monitor the doorbell traffic by running tcpdump
+
 SKYBELL_CMD_TCPDUMP="ssh ${ROUTER_USER}@${ROUTER_HOST} \"/usr/sbin/tcpdump -lpnttti eth0 port 5683\""
 
-# Example Command executed when a button press or motion is detected
-#SKYBELL_CMD_MOTION="curl -d '{\"secret\":\"${HOMEBRIDGE_SKYBELL_SECRET}\",\"name\":\"${SKYBELL_NAME}\"}' http://localhost:${HOMEBRIDGE_SKYBELL_PORT}/homebridge-skybell/trigger/motion"
+# Command executed when a button press or motion is detected, examples given
 #SKYBELL_CMD_MOTION="/usr/bin/curl '' http://$LINUX_SERVER:5000/play/doorbell1.mp3"
 #SKYBELL_CMD_MOTION="/usr/bin/curl '' http://$LINUX_SERVER:5000/play/imperialmarch.mp3"
 # OR Just define a bash script and put your commands in there
