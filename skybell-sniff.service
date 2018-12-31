@@ -14,7 +14,7 @@ ExecStart=/usr/local/bin/skybell-sniff.pl ${SKYBELL_HOST} ${SKYBELL_CMD_TCPDUMP}
 StandardOutput=journal
 Restart=on-failure
 RestartSec=10
-KillMode=process
+KillMode=control-group
 
 [Install]
 WantedBy=multi-user.target
