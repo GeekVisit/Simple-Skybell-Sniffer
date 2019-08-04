@@ -1,4 +1,4 @@
-# Simple-Skybell-Sniffer (No Homebridge Required)
+# Simple-Skybell-Sniffer - Near Instant Response - Use with Home Assistant or NOT (No Homebridge Required)
 ## A Simple Low Latency Sniffer for Skybell HD
 This is a fork of [thoukydides's](https://github.com/thoukydides) [gist](https://gist.github.com/thoukydides/27eb6abd1bb84c78f2f9a4f0d9d111a2) containing the sniffer component files for his [Webhooks sniffer](https://github.com/thoukydides/homebridge-skybell/wiki/Webhooks-Sniffer) for
 [Skybell](https://www.amazon.com/SkyBell-SH02300BZ-Bronze-Video-Doorbell/dp/B01DLLU1AI/ref=sr_1_1?ie=UTF8&qid=1536003498&sr=8-1&keywords=skybell+hd), a video doorbell.  This sniffer allows you to trigger events (like playing mp3 files or executing shell scripts) when Skybell is pressed. There are methods to detect a Skybell press by logging into Skybell's servers but it is painfully slow. This sniffer allows a response time within a second or two. See Thoukydides' project for a Homebridge Skybell plugin for a detailed [explanation](https://github.com/thoukydides/homebridge-skybell/). 
