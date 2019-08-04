@@ -56,9 +56,53 @@ Variable                    | Examples                    | Description
 `ROUTER_HOST`               | `192.168.0.1`               | The hostname or IP address of the gateway/router.
 `ROUTER_USER`               | `root`                      | The `ssh` username for connecting to the gateway/router to run `tcpdump`.
 
-`SKYBELL_CMD_TCPDUMP` and `SKYBELL_CMD_MOTION` may also be modified to change how `tcpdump` is launched, or to execute a different command when a button press or motion is detected.
+`SKYBELL_CMD_TCPDUMP` may also be modified to change how `tcpdump` is launched.
 
-## Starting and Stopping
+# How to Ring a Bell, Trigger any script, and/or Use with Home Assistant  
+
+In  `/etc/default/skybell-sniff`, set SKYBELL_CMD_MOTION to point to a script to run. For instance, set it to a bash script such as /home/homeassistant/skybell-actions.sh".
+
+The bash script can then play an mp3 file of a bell ringing, or do anything else you want. 
+
+To use with [Home Assistant] (https://www.home-assistant.io/) see the example included `skybell-actions.sh` which publishes an mqtt topic which then can be detected by a sensor in HomeAssistant.
+
+### So `skybell-actions.sh` would have: 
+```
+mosquitto_pub -h [mqtt broker ip] -p [mqtt broker port] -t skybell/doorbell/state -m "Ringing"
+mosquitto_pub -h [mqtt broker ip] -p [mqtt broker port] -t skybell/motion/state -m "Detected"
+sleep 2
+mosquitto_pub -h [mqtt broker ip] -p [mqtt broker port] -t skybell/doorbell/state -m "OFF"
+mosquitto_pub -h [mqtt broker ip] -p [mqtt broker port] -t skybell/motion/state -m "OFF"
+```
+### And your Home Assistant configuration.yaml would have: 
+
+
+
+
+```
+#Under Sensor:
+- platform: mqtt
+    name: "mqtt_skybell_doorbell"
+    state_topic: "skybell/doorbell/state"
+    qos: 1
+
+#Under Automation:
+
+ - alias: Doorbell
+    trigger:
+      platform: state
+      entity_id: sensor.mqtt_skybell_doorbell
+      from: 'OFF'
+      to: 'Ringing'
+    action:
+      - service: media_player.play_media
+        data:
+          entity_id: media_player.family_room_speaker
+          media_content_id: "https://[your server].duckdns.org:443/doorbell1.mp3"
+          media_content_type: 'audio/mp3' 
+```
+
+# Starting and Stopping Skybell Sniffer
 
 Start the doorbell sniffer process using:
 ```
