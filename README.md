@@ -31,7 +31,7 @@ without the Homebridge stuff.
 
 File | Location
 ---- | --------
-`skybell-sniff-pl` | `/usr/local/bin/skybell-sniff.pl` (or an alternative location of your choice)
+`skybell-sniff.pl` | `/usr/local/bin/skybell-sniff.pl` (or an alternative location of your choice)
 `skybell-sniff.service` | `/etc/systemd/system/skybell-sniff.service`
 `skybell-sniff` | `/etc/default/skybell-sniff`
 
