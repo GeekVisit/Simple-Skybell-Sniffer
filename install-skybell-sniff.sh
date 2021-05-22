@@ -1,4 +1,20 @@
 #!/bin/bash
+
+#skybell-sniff install script
+
+
+############################################################
+#Copyright 2021 GeekVisit
+#https://github.com/GeekVisit/Simple-Skybell-Sniffer/
+############################################################
+
+###############################################################
+#This is a basic install script. Your mileage may vary depending 
+#on your distro so please review and edit as needed.
+################################################################
+
+
+
 echo -e "\r\nINSTALLING skybell-sniff . . .\r\n"
 sleep 1
 echo -e "STOPPING service . . . \r\n"

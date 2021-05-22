@@ -1,7 +1,7 @@
 # /etc/default/skybell-sniff -x
 # Copyright © 2017 Alexander Thoukydides (Homebridge plugin)
 # Copyright @2021 Geekvisit (changes made for Simple Skybell Sniffer to delete homebridge stuff)
-#
+# https://github.com/GeekVisit/Simple-Skybell-Sniffer/
 #########################################
 # SET THESE VARIABLES TO APPLICABLE SETTINGS FOR YOUR SETUP
 # ####################################################

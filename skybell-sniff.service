@@ -1,7 +1,7 @@
 # /etc/systemd/system/skybell-sniff.service
 # Copyright © 2017 Alexander Thoukydides
 # Copyright © 221 GeekVisit 
-
+# https://github.com/GeekVisit/Simple-Skybell-Sniffer/
 [Unit]
 Description=SkyBell HD event detection
 After=network-online.target
@@ -13,7 +13,7 @@ Type=simple
 #sudo dpkg-reconfigure wireshark-common  (answer yes)
 #sudo chmod +x /usr/bin/dumpcapsudo chmod +x /usr/bin/dumpcap
 
-User=[username]
+User=root
 EnvironmentFile=/etc/default/skybell-sniff
 ExecStart=/usr/local/bin/skybell-sniff.pl ${SKYBELL_HOST} ${SNIFFER} ${SNIFFER_CMD_TCPDUMP} ${SNIFFER_CMD_TSHARK} ${SKYBELL_CMD_ACTION}  
 StandardOutput=journal
