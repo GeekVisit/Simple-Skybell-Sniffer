@@ -1,5 +1,6 @@
 # /etc/systemd/system/skybell-sniff.service
 # Copyright © 2017 Alexander Thoukydides
+# Copyright © 221 GeekVisit 
 
 [Unit]
 Description=SkyBell HD event detection
@@ -7,14 +8,18 @@ After=network-online.target
 
 [Service]
 Type=simple
-#edit to put in your username
-User=username
+#
+#Set USER To user running script. if dont use root then  username will need to be part of wireshark group if using tshark. Commands are:
+#sudo dpkg-reconfigure wireshark-common  (answer yes)
+#sudo chmod +x /usr/bin/dumpcapsudo chmod +x /usr/bin/dumpcap
+
+User=[username]
 EnvironmentFile=/etc/default/skybell-sniff
-ExecStart=/usr/local/bin/skybell-sniff.pl ${SKYBELL_HOST} ${SKYBELL_CMD_TCPDUMP} ${SKYBELL_CMD_MOTION}
+ExecStart=/usr/local/bin/skybell-sniff.pl ${SKYBELL_HOST} ${SNIFFER} ${SNIFFER_CMD_TCPDUMP} ${SNIFFER_CMD_TSHARK} ${SKYBELL_CMD_ACTION}  
 StandardOutput=journal
-Restart=on-failure
+#Restart=on-failure
 RestartSec=10
-KillMode=control-group
+KillMode=process
 
 [Install]
 WantedBy=multi-user.target

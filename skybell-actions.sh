@@ -41,7 +41,8 @@
 
 VISIT_TIME=$(date '+%m-%d-%Y %l:%M:%S %p')
 #Change 192.168.0.200 to your mqtt broker (e.g., mosquitto) and -p to mosquitto port)
-mosquitto_pub -h 192.168.0.200 -p 1883 -t skybell/doorbell/state -m "Ringing"
+#silent - comment out
+/usr/bin/mosquitto_pub -h 192.168.0.200 -p 1883 -t skybell/doorbell/state -m "Ringing"
 mosquitto_pub -h 192.168.0.200 -p 1883 -t skybell/motion/state -m "Detected"
 sleep 2 
 mosquitto_pub -h 192.168.0.200 -p 1883 -t skybell/doorbell/state -m "OFF"
@@ -49,7 +50,7 @@ mosquitto_pub -h 192.168.0.200 -p 1883 -t skybell/motion/state -m "OFF"
 
 
 
-logger $VISIT_TIME": Rung Doorbell"
+logger $VISIT_TIME": Script: Button Pressed - Skybell Doorbell Rung"
 #to get log of rings do this: 
-#sudo tail -f /var/log/syslog | grep skybell
+#sudo tail -f /var/log/syslog | grep -i skybell
 

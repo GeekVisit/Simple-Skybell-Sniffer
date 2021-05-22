@@ -1,23 +1,39 @@
-# /etc/default/skybell-sniff
+# /etc/default/skybell-sniff -x
 # Copyright © 2017 Alexander Thoukydides (Homebridge plugin)
-# Copyright @2018 Geekvisit (changes made for Simple Skybell Sniffer to delete homebridge stuff)
-
-# SkyBell HD doorbell hostname (or IP address) and name
-SKYBELL_HOST=192.168.0.133 
-#Name of Skybell in he Skybell App
-SKYBELL_NAME='Front Door' 
-#Internal IP address of your linux server
-LINUX_SERVER=$(ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p')
-# Change to your Gateway/router hostname and ssh username
+# Copyright @2021 Geekvisit (changes made for Simple Skybell Sniffer to delete homebridge stuff)
+#
+#########################################
+# SET THESE VARIABLES TO APPLICABLE SETTINGS FOR YOUR SETUP
+# ####################################################
+# SkyBell HD  IP address [should be static] and name
+SKYBELL_HOST=192.168.0.XXX
+SKYBELL_NAME='Front Door'
+# Gateway/router hostname and ssh username
 ROUTER_HOST=192.168.0.1
 ROUTER_USER=root
 
-# SSH command to your router to monitor the doorbell traffic by running tcpdump
+LINUX_SERVER=$(ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p')
+#
+#Set SNIFFER to either "tcpdump" or "tshark" depending on router. 
+#Use tcpdump for ddwrt and other routers that allow ssh
+#
+#Use tshark for mikrotik routers. 
+#tshark is command line version of wireshark that listens on port for packets streamed to it by mikrotik's routeros
+#tshark available here: https://tshark.dev/setup/install
+#for tshark to work, there must be a sniffer on router streaming packets to 37008 and that port must be open on the client
 
-SKYBELL_CMD_TCPDUMP="ssh ${ROUTER_USER}@${ROUTER_HOST} \"/usr/sbin/tcpdump -lpnttti eth0 port 5683\""
+#for mikrotik routers
+SNIFFER=tshark  
+#for ddwrt firmware or other routers that allow ssh nd tcpdump
+#SNIFFER=tcpdump  
 
-# Command executed when a button press or motion is detected, examples given
-#SKYBELL_CMD_MOTION="/usr/bin/curl '' http://$LINUX_SERVER:5000/play/doorbell1.mp3"
-#SKYBELL_CMD_MOTION="/usr/bin/curl '' http://$LINUX_SERVER:5000/play/imperialmarch.mp3"
-# OR Just define a bash script and put your commands in there
-SKYBELL_CMD_MOTION="/home/root/scripts/skybell-actions.sh"
+SNIFFER_CMD_TSHARK="/usr/bin/tshark -l -Y 'coap' -f 'port 37008' -i eth0 -T fields -e 'frame.len'"
+SNIFFER_CMD_TCPDUMP="ssh ${ROUTER_USER}@${ROUTER_HOST} \"/usr/sbin/tcpdump -lpnttti eth0 port 5683 \""
+# Command executed when a button press or motion is detected
+#examples:
+#SKYBELL_CMD_ACTION="/usr/bin/curl '' http://$LINUX_SERVER:5000/play/doorbell.mp3"
+
+#add absolute path to bash script holding commands to ring bell, etc. 
+SKYBELL_CMD_ACTION="[absolute path to]/skybell-actions.sh"
+
+
