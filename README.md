@@ -190,4 +190,4 @@ This project takes only those scripts from the Thoukydides project which need to
 
 ### NOTE:
 
-> Release 0.30 of the Simple Skybell Sniffer adds Mikrotik compatibility. I needed to add Mikrotik support as I replaced my old Netgear router flashed with DD-WRT with a Mikrotik HaP AC2 router. After replacing my DD-WRT router, I have not gone back and tested it with DD-WRT. As a result, if DD-WRT does not work, try the 0.21 Release. 
+> Release 0.30 of the Simple Skybell Sniffer adds Mikrotik compatibility. I needed to add Mikrotik support as I replaced my old Netgear router flashed with DD-WRT with a Mikrotik HaP AC2 router. After replacing my DD-WRT router, I have not gone back and tested it with DD-WRT. As a result, if DD-WRT does not work, try the [0.21](https://github.com/GeekVisit/Simple-Skybell-Sniffer/releases/tag/0.21) Release. 
