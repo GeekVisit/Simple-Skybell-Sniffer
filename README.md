@@ -26,20 +26,19 @@ For a detailed description on hardware and software setup see my blog entry [How
 
 # How it Works
 
-This service is to be installed on a Raspberry Pi or other Linux box (referred to here as the "Linux Sniffer Client". It listens for the Skybell button push by sniffing your router traffic. Once the Service detects the Skybell's button push, it runs any custom command(s).
+This service is to be installed on a Raspberry Pi or other Linux box. It listens for the Skybell button push by sniffing your router traffic. Once the Service detects the Skybell's button push, it runs any custom command(s).
 
 # Why Use It ?
 
 - No existing doorbell, an electronic chime that is incompatible with Skybell, or can't hook up your Skybell to your existing doorbell wiring ? No problem, this will allow you to wirelessly detect the button press and play an mp3 of a doorbell ringing.
 - Make your doorbell (or motion detection) trigger any command you wish.
-- Publish an MQTT message to any topic and have HomeAssistant, Nodered or any similar IOT software respond. For example, you can cast to your Google Home Devices when someone presses the doorbell or have the Google Assistant announce "You have a visitor at your door"
+- Publish an MQTT message to any topic and have [HomeAssistant](https://www.home-assistant.io/), [Node-RED](https://nodered.org/) or any similar IOT software respond. For example, you can cast to your Google Home Devices when someone presses the doorbell or have the Google Assistant announce "You have a visitor at your door"
 - Send custom telegram notifications to your phone using the [Telegram CLI](https://github.com/vysheng/tg).
 
-For me this  [solved a problem of an old Music & Sound doorbell and intercom system] (https://geekvisit.com/updating-an-old-music-sound-intercom-system-with-skybell-hd-part-2-of-2-or-how-to-have-skybell-ring-a-doorbell-without-wires-using-skybell-sniffer/) that was incompatible with a hard wired connection with Skybell. I connected the system's transformer to the Skybell for power, then used this Service to detect the doorbell press and play an mp3 recording of a doorbell sound over Google Assistant speakers. I didn't have to replace or install transformers or do any major rewiring.
+For me this [solved a problem of an old Music & Sound doorbell and intercom system](https://geekvisit.com/updating-an-old-music-sound-intercom-system-with-skybell-hd-part-2-of-2-or-how-to-have-skybell-ring-a-doorbell-without-wires-using-skybell-sniffer/) that was incompatible with a hard wired connection with Skybell. I connected the system's transformer to the Skybell for power, then used this Service to detect the doorbell press and play an mp3 recording of a doorbell sound over Google Assistant speakers. I didn't have to replace or install transformers or do any major rewiring.
 
 ## Installation
 
-This is a slightly modified version of the [Homebridge Webhooks Sniffer](https://github.com/thoukydides/homebridge-skybell/wiki/Webhooks-Sniffer) without the Homebridge stuff.
 
 ### DD-WRT or Other Routers Permitting SSH
 
@@ -109,15 +108,15 @@ Use the IP address of your Skybell and the IP address of your server running the
      style="display:block;float:none;margin-left:auto;margin-right:auto;width:60%"> 
 
 
-5. Open port 37008 on your Linux box by typing `ufw allow 37008" or other tool. This is the port that your Mikrotik router will stream to and tshark will listen on. You can modify this port by editing the `SNIFFER_CMD_TSHARK` variable in skybell-sniff.
+5. Open port 37008 on your Linux box by typing `ufw allow 37008` or equivalent using another firewall tool. This is the port that your Mikrotik router will stream to and on which tshark will listen. You can modify this port by editing the `SNIFFER_CMD_TSHARK` variable in skybell-sniff.
 
 # How to Ring a Bell, Trigger any script, and/or Use with Home Assistant
 
-In `/etc/default/skybell-sniff`, set SKYBELL_CMD_ACTION to point to a script to run. For instance, set it to a bash script such as /home/homeassistant/skybell-actions.sh". An example script is included.
+In `/etc/default/skybell-sniff`, set SKYBELL_CMD_ACTION to a script you want to run. For instance, set it to a bash script such as `/home/homeassistant/skybell-actions.sh`. An example script is included.
 
 The bash script can then play an mp3 file of a bell ringing, or do anything else you want.
 
-To use with [Home Assistant] (https://www.home-assistant.io/) see the example included `skybell-actions.sh` which publishes an mqtt topic which then can be detected by a sensor in HomeAssistant.
+To use with [Home Assistant](https://www.home-assistant.io/) see the example included `skybell-actions.sh` which publishes an mqtt topic which then can be detected by a sensor in HomeAssistant.
 
 ### So `skybell-actions.sh` would have:
 
@@ -180,8 +179,8 @@ The following commands can be used to control and monitor the process:
 
 ## Background/History
 
-This is a fork of [thoukydides's](https://github.com/thoukydides) [gist](https://gist.github.com/thoukydides/27eb6abd1bb84c78f2f9a4f0d9d111a2) containing the sniffer component files for his [Webhooks sniffer](https://github.com/thoukydides/homebridge-skybell/wiki/Webhooks-Sniffer) for
-[Skybell](https://www.amazon.com/SkyBell-SH02300BZ-Bronze-Video-Doorbell/dp/B01DLLU1AI/ref=sr_1_1?ie=UTF8&qid=1536003498&sr=8-1&keywords=skybell+hd), a video doorbell.
+
+This is a slightly modified version of the [Homebridge Webhooks Sniffer](https://github.com/thoukydides/homebridge-skybell/wiki/Webhooks-Sniffer) without the Homebridge stuff, and is a fork of [thoukydides's](https://github.com/thoukydides) [gist](https://gist.github.com/thoukydides/27eb6abd1bb84c78f2f9a4f0d9d111a2) containing the sniffer component files.
 
 This fork does not require HomeBridge and allows you to trigger events (like playing mp3 files or executing shell scripts) when Skybell is pressed. There are methods to detect a Skybell press by logging into Skybell's servers but it is painfully slow. This sniffer allows a response time within a second or two. See Thoukydides' project for a Homebridge Skybell plugin for a detailed [explanation](https://github.com/thoukydides/homebridge-skybell/).
 
@@ -191,4 +190,4 @@ This project takes only those scripts from the Thoukydides project which need to
 
 ### NOTE:
 
-> Version 0.3 release adds Mikrotik compatibility and was a significant refactoring. I did then when I replaced my old Netgear router flashed with DD-WRT with a Mikrotik HaP AC2 one. It works with Mikrotik and incorporates the code used with the DD-WRT router. But I have not gone back and tested it to verify it continues to work with DD-WRT. It should but there may be some quirky bug. If the DD-WRT does not work, try the 0.21 Release.
+> Release 0.30 of the Simple Skybell Sniffer adds Mikrotik compatibility. I needed to add Mikrotik support as I replaced my old Netgear router flashed with DD-WRT with a Mikrotik HaP AC2 router. After replacing my DD-WRT router, I have not gone back and tested it with DD-WRT. As a result, if DD-WRT does not work, try the 0.21 Release. 
