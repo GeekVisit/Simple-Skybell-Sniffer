@@ -9,7 +9,7 @@
 
 - ## No Homebridge Required
 
-- ## Now use with MIKROTIK Routers (v. 0.30)
+- ## Support for Mikrotik Routers Added (v. 0.30)
 
 ## Description
 
