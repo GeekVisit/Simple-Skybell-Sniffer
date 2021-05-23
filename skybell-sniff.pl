@@ -15,7 +15,7 @@ $| = 1, select $_ for select STDOUT;
 print "Skybell_host is $skybell_host cmd_action is $cmd_action and sniffer is $sniffer\r\n";
 
 # Sniff the SkyBell traffic:
-print "Sniffing SkyBell HD\n";
+print "Sniffing SkyBell HD\n"; .
 
 if ($sniffer eq "tcpdump") {  #beginning of if
 $cmd_sniff = $sniffer_tcpdump; 
