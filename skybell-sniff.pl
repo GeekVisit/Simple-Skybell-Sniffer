@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 # Copyright © 2017 Alexander Thoukydides
-# Copyright © 221 Geekvisit 
+# Copyright © 2021 Geekvisit 
 use strict;
 use warnings;
 
@@ -112,6 +112,8 @@ my $length = 0;
 my $priorlength = 0;
 while (<$pipe>)
 {
+    $priorlength = $length;
+    $length = $_;
 
     #  print sprintf ("Length is %s..\r\n", $length);
 
