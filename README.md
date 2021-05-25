@@ -91,7 +91,7 @@ delay 10
 /tool sniffer
 set file-limit=10KiB file-name=doorbell.pcap filter-direction=tx \
     filter-interface=wlan-2GHZ filter-ip-address=192.168.0.xxx \
-    filter-ip-protocol=udp filter-operator-between-entries=and filter-stream=\
+    filter-ip-protocol=udp filter-operator-between-entries=and filter-port=5683 filter-stream=\
     yes memory-limit=1000KiB streaming-enabled=yes streaming-server=\
     192.168.0.xxx
 
