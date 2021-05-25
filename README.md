@@ -12,7 +12,7 @@
 
 ## Description
 
-For a somewhat dated but detailed description on hardware and software setup see my blog entry [How to Have Skybell Ring a Virtual Doorbell Using Skybell Sniffer](https://geekvisit.com/updating-an-old-music-sound-intercom-system-with-skybell-hd-part-2-of-2-or-how-to-have-skybell-ring-a-doorbell-without-wires-using-skybell-sniffer/).  The entry illustrates setup with a DD-WRT flashed router using the 0.21 release. Configuration is slightly difference (e.g., on 0.30 and above you will need to set the SNIFFER variable to "tcpdump' for use with DD-WRT flashed routers.)
+For a somewhat dated but detailed description on hardware and software setup see my blog entry [How to Have Skybell Ring a Virtual Doorbell Using Skybell Sniffer](https://geekvisit.com/updating-an-old-music-sound-intercom-system-with-skybell-hd-part-2-of-2-or-how-to-have-skybell-ring-a-doorbell-without-wires-using-skybell-sniffer/).  The entry illustrates setup with a DD-WRT flashed router using the 0.21 release of this service. Configuration is slightly different from what is shown in the blog entry (e.g., on 0.30 and above you will need to set the SNIFFER variable to "tcpdump' for use with DD-WRT flashed routers.)
 
 ` SkyBell is a trademark owned by SkyBell Technologies, Inc. This project is not endorsed or in anyway affiliated with Skybell.`
 
