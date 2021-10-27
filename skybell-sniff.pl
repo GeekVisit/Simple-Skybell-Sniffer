@@ -3,7 +3,6 @@
 # Copyright © 2021 Geekvisit 
 use strict;
 use warnings;
-
 my $cmd_sniff="";
 use Socket;
 my ($skybell_host, $sniffer, $sniffer_tcpdump, $sniffer_tshark, $cmd_action) = @ARGV;
@@ -15,7 +14,7 @@ $| = 1, select $_ for select STDOUT;
 print "Skybell_host is $skybell_host cmd_action is $cmd_action and sniffer is $sniffer\r\n";
 
 # Sniff the SkyBell traffic:
-print "Sniffing SkyBell HD\n"; 
+print "Sniffing SkyBell HD\n";
 
 if ($sniffer eq "tcpdump") {  #beginning of if
 $cmd_sniff = $sniffer_tcpdump; 
@@ -87,7 +86,8 @@ while (<$pipe>)
     }
     elsif ($state eq 'armed')
     {
-        if(not $from_skybell and $length == 49)
+        if((not $from_skybell and $length == 49)
+			or (not $from_skybell and $length == 33))
         {
             print "Motion detected\n";
             $state = 'motion';
@@ -112,19 +112,24 @@ my $length = 0;
 my $priorlength = 0;
 while (<$pipe>)
 {
+
     $priorlength = $length;
     $length = $_;
 
-    print sprintf ("Skybell Packet Length is %s..\r\n", $length);
+     print sprintf ("Skybell Length is %s..\r\n", $length);
 
-if ($length != 186  and $length != 986)
+if ($length == 190 && $priorlength != 190) {
+	print "detected DNS 190. Sleeping ..\n";
+	sleep (2.0);
+	next; 
+}
+if (($length == 119 or length == 125 or $length == 126 or $length == 140 or $length == 183 or $length == 190) and $priorlength == 190) 
 {
-if ($priorlength == 186) { 
-print "skybell sniffer: Button Pressed or Motion Detected\n";
+print "mod: skybell sniffer: Button Pressed or Motion Detected Length is $length prior is $priorlength\n";
 #execute commands to ring bell or whatever
 system($cmd_action) == 0
     or warn "Failed to execute command: $?\n";
-    }
+sleep (40); #minimum seconds between bells (prevents second ring)
 }
 }
 }
