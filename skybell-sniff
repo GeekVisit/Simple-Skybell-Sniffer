@@ -27,7 +27,7 @@ SNIFFER=tshark
 #for ddwrt firmware or other routers that allow ssh nd tcpdump
 #SNIFFER=tcpdump  
 
-SNIFFER_CMD_TSHARK="/usr/bin/tshark -l -Y 'coap' -f 'port 37008' -i eth0 -T fields -e 'frame.len'"
+SNIFFER_CMD_TSHARK="/usr/bin/tshark -l -f 'port 37008' -i eth0 -T fields -e 'frame.len'"
 SNIFFER_CMD_TCPDUMP="ssh ${ROUTER_USER}@${ROUTER_HOST} \"/usr/sbin/tcpdump -lpnttti eth0 port 5683 \""
 # Command executed when a button press or motion is detected
 #examples:
