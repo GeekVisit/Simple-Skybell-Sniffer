@@ -1,6 +1,6 @@
 
 ---
-NOTE: This is now depracated and I will no longer maintain this project. As of around September, 2021 or so Skybell changed the way it accessed its servers and it's no longer possible to reliably detect motion or button presses. Personaly I have switched to a system in which I use Android's [Tasker](https://play.google.com/store/apps/details?id=net.dinglisch.android.taskerm&hl=en_US&gl=US)  application to detect notifications and trigger a [Node-RED](https://nodered.org/)/Home Assistant routine to ring the doorbell and detect motion. It works very well (distinguishes between motion and bell ringing which the sniffer meethod could not and is much faster, but does introduct the Android dependency). I will post a full writeup at [geekvisti.com](https://www.geekvisit.com).
+NOTE: This is now deprecated and I will no longer maintain this project. As of around September, 2021 or so Skybell changed the way it accessed its servers and it's no longer possible to reliably detect motion or button presses. Personaly I have switched to a system in which I use Android's [Tasker](https://play.google.com/store/apps/details?id=net.dinglisch.android.taskerm&hl=en_US&gl=US)  application to detect notifications and trigger a [Node-RED](https://nodered.org/)/Home Assistant routine to ring the doorbell and detect motion. It works very well (distinguishes between motion and bell ringing which the sniffer meethod could not and is much faster, but does introduct the Android dependency). I will post a full writeup at [geekvisit.com](https://www.geekvisit.com).
 
 
 ---
